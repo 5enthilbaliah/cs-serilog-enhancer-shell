@@ -1,0 +1,1 @@
+# cs-serilog-enhancer-shell
