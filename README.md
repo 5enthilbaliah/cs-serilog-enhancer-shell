@@ -1,15 +1,14 @@
-# cs-usecase-executr-shell
+# cs-userilog-enhancer-shell
 
 ## Prerequisites
-- You should have a local instance of sql server; We recommend to docker compose up the ms-sql-foundation.
-- Make sure that the database has the amrita-tribe database. If mot apply migrations from cs-mssql-tribe-crafter
+- none
 
 ## About project
 
 ## Set up
 - Clone the repository
 ```shell
-git clone https://github.com/5enthilbaliah/cs-usecase-executr-shell.git
+git clone https://github.com/5enthilbaliah/cs-userilog-enhancer-shell.git
 ```
 
 ## Set up nuget repository (Ubuntu)
@@ -35,7 +34,7 @@ alias nuget="mono /usr/local/bin/nuget.exe"
 ### Create local Nuget repository
 - Create a folder at shells folder level named .private_nuget. Run the below command, replace the {version} with version in nuget pkg.
 ```shell
-nuget add bin/Release/UseCaseExecutR.{version}.nupkg -source ../../.private_nuget/
+nuget add bin/Release/Serilog.Enhancers.{version}.nupkg -source ../../.private_nuget/
 ```
 
 ### Update the ubuntu nuget settings 
