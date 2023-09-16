@@ -9,7 +9,9 @@ public class EnhancedLogger<TContext> : IEnhancedLogger<TContext>
     public EnhancedLogger(ILogger logger)
     {
         if (logger is null)
+        {
             throw new ArgumentNullException(nameof(logger));
+        }
 
         _logger = logger.ForContext<TContext>();
     }
@@ -55,7 +57,8 @@ public class EnhancedLogger<TContext> : IEnhancedLogger<TContext>
         _logger.Verbose(exception, messageTemplate, propertyValue0, propertyValue1);
     }
 
-    public void LogVerbose<T0, T1, T2>(Exception? exception, string messageTemplate, T0 propertyValue0, T1 propertyValue1,
+    public void LogVerbose<T0, T1, T2>(Exception? exception, string messageTemplate, T0 propertyValue0,
+        T1 propertyValue1,
         T2 propertyValue2)
     {
         _logger.Verbose(exception, messageTemplate, propertyValue0, propertyValue1, propertyValue2);
@@ -132,7 +135,8 @@ public class EnhancedLogger<TContext> : IEnhancedLogger<TContext>
         _logger.Information(messageTemplate, propertyValue0, propertyValue1);
     }
 
-    public void LogInformation<T0, T1, T2>(string messageTemplate, T0 propertyValue0, T1 propertyValue1, T2 propertyValue2)
+    public void LogInformation<T0, T1, T2>(string messageTemplate, T0 propertyValue0, T1 propertyValue1,
+        T2 propertyValue2)
     {
         _logger.Information(messageTemplate, propertyValue0, propertyValue1, propertyValue2);
     }
@@ -152,12 +156,14 @@ public class EnhancedLogger<TContext> : IEnhancedLogger<TContext>
         _logger.Information(exception, messageTemplate, propertyValue);
     }
 
-    public void LogInformation<T0, T1>(Exception? exception, string messageTemplate, T0 propertyValue0, T1 propertyValue1)
+    public void LogInformation<T0, T1>(Exception? exception, string messageTemplate, T0 propertyValue0,
+        T1 propertyValue1)
     {
         _logger.Information(exception, messageTemplate, propertyValue0, propertyValue1);
     }
 
-    public void LogInformation<T0, T1, T2>(Exception? exception, string messageTemplate, T0 propertyValue0, T1 propertyValue1,
+    public void LogInformation<T0, T1, T2>(Exception? exception, string messageTemplate, T0 propertyValue0,
+        T1 propertyValue1,
         T2 propertyValue2)
     {
         _logger.Information(exception, messageTemplate, propertyValue0, propertyValue1, propertyValue2);
@@ -208,7 +214,8 @@ public class EnhancedLogger<TContext> : IEnhancedLogger<TContext>
         _logger.Warning(exception, messageTemplate, propertyValue0, propertyValue1);
     }
 
-    public void LogWarning<T0, T1, T2>(Exception? exception, string messageTemplate, T0 propertyValue0, T1 propertyValue1,
+    public void LogWarning<T0, T1, T2>(Exception? exception, string messageTemplate, T0 propertyValue0,
+        T1 propertyValue1,
         T2 propertyValue2)
     {
         _logger.Warning(exception, messageTemplate, propertyValue0, propertyValue1, propertyValue2);

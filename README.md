@@ -52,3 +52,46 @@ Update this config to include the private directory path we create
   </packageSources>
 </configuration>
 ```
+
+### Set up the Serilog settings
+- Add json settings in appSettings
+```
+...
+"Serilog": {
+    "Using":  [ "Serilog.Sinks.Console", "Serilog.Enhancers" ],
+    ...
+    "WriteTo": [{
+      "Name": "Console",
+      "Args": {
+        "outputTemplate": "[{Timestamp:HH:mm:ss} {Level:u3} {ApplicationName}] <x:{CorrelationId}> <m:{MachineName}> {Message:lj} <s:{SourceContext}> {NewLine}{Exception}"
+      }
+    }],
+    "Enhancer": {
+      "CorrelationKey": "x-correlation-id",
+      "DefaultCorrelationId": "36f47eb8-fe7c-42d6-aeb0-32f683d27aa1",
+      "CorrelationIdPropertyName": "CorrelationId"
+    }
+  }
+...
+```
+- To read EnhancerSettings from appsettings inject IOptions<SerilogEnhancedSettings>, provide the correct path
+```csharp
+hostBuilder.Services.Configure<SerilogEnhancedSettings>(configuration.GetSection("Serilog:Enhancer"));
+```
+- Add HttpContextAccessor dependency
+```csharp
+hostBuilder.Services.AddHttpContextAccessor();
+```
+- Add Enhancer to LoggerConfiguration in the UseSerilog
+```csharp
+Log.Logger = new LoggerConfiguration()
+            .CreateBootstrapLogger();
+        
+        hostBuilder.Host.UseSerilog((_, sp, lc) =>
+        {
+            lc.ReadFrom.Configuration(configuration)
+                .AttachHttpEnricher(sp);
+        });
+
+        hostBuilder.Services.AddSerilogEnhancedLogger();
+```
